@@ -20,19 +20,26 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="What is it with that Mary girl?  Dragging me to school every day. As if I had a choice.  What you don’t hear in those nursery rhymes is that she starves me if I don’t go to school with her; it’s the o">
+  <meta name="description" content="划重点：F5 或者 刷新Simulink Library Browser1、在TruckSim中点击Send to Simulink 2、待Simulink打开之后，点击Simulink Library Browser 3、出现Simulink Library Browser  如果没有出现TruckSim S-Funciton也没有出现提醒信息“Fix”；则右键任意条目点击Refresh刷新或者">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="http://yoursite.com/2020/06/07/test/index.html">
+<meta property="og:title" content="TruckSim8.1与Matlab2018a联合仿真找不到TruckSim S-Function的解决办法">
+<meta property="og:url" content="http://yoursite.com/2020/06/07/trucksim_s_function/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="What is it with that Mary girl?  Dragging me to school every day. As if I had a choice.  What you don’t hear in those nursery rhymes is that she starves me if I don’t go to school with her; it’s the o">
+<meta property="og:description" content="划重点：F5 或者 刷新Simulink Library Browser1、在TruckSim中点击Send to Simulink 2、待Simulink打开之后，点击Simulink Library Browser 3、出现Simulink Library Browser  如果没有出现TruckSim S-Funciton也没有出现提醒信息“Fix”；则右键任意条目点击Refresh刷新或者">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3990540-a7d310ed66eba076.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3990540-a9c3143999d6817d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3990540-c653fb739862ecbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3990540-869ca2e7688e69bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3990540-8285687c61ce175d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2020-06-07T13:42:17.000Z">
-<meta property="article:modified_time" content="2020-06-07T13:53:52.498Z">
+<meta property="article:modified_time" content="2020-06-09T14:33:43.876Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="TruckSim, MATLAB">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3990540-a7d310ed66eba076.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
-<link rel="canonical" href="http://yoursite.com/2020/06/07/test/">
+<link rel="canonical" href="http://yoursite.com/2020/06/07/trucksim_s_function/">
 
 
 <script id="page-configurations">
@@ -45,7 +52,7 @@
   };
 </script>
 
-  <title>test | Hexo</title>
+  <title>TruckSim8.1与Matlab2018a联合仿真找不到TruckSim S-Function的解决办法 | Hexo</title>
   
 
 
@@ -150,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/test/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/trucksim_s_function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +170,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          test
+          TruckSim8.1与Matlab2018a联合仿真找不到TruckSim S-Function的解决办法
         </h1>
 
         <div class="post-meta">
@@ -172,10 +179,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-06-07 21:42:17 / Modified: 21:53:52" itemprop="dateCreated datePublished" datetime="2020-06-07T21:42:17+08:00">2020-06-07</time>
+              <time title="Created: 2020-06-07 21:42:17" itemprop="dateCreated datePublished" datetime="2020-06-07T21:42:17+08:00">2020-06-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-09 22:33:43" itemprop="dateModified" datetime="2020-06-09T22:33:43+08:00">2020-06-09</time>
+              </span>
 
           
 
@@ -188,7 +201,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>What is it with that Mary girl?  Dragging me to school every day. As if I had a choice.  What you don’t hear in those nursery rhymes is that she starves me if I don’t go to school with her; it’s the only way I can stay alive!  I’m thinking about being adopted by Little Bo Peep, sure I may get lost, but anything is better than being with Mary and those little brats at school (shudder, shudder).</p>
+        <h2 id="划重点：F5-或者-刷新Simulink-Library-Browser"><a href="#划重点：F5-或者-刷新Simulink-Library-Browser" class="headerlink" title="划重点：F5 或者 刷新Simulink Library Browser"></a>划重点：F5 或者 刷新Simulink Library Browser</h2><h3 id="1、在TruckSim中点击Send-to-Simulink"><a href="#1、在TruckSim中点击Send-to-Simulink" class="headerlink" title="1、在TruckSim中点击Send to Simulink"></a>1、在TruckSim中点击Send to Simulink</h3><p><img src="https://upload-images.jianshu.io/upload_images/3990540-a7d310ed66eba076.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
+<h3 id="2、待Simulink打开之后，点击Simulink-Library-Browser"><a href="#2、待Simulink打开之后，点击Simulink-Library-Browser" class="headerlink" title="2、待Simulink打开之后，点击Simulink Library Browser"></a>2、待Simulink打开之后，点击Simulink Library Browser</h3><p><img src="https://upload-images.jianshu.io/upload_images/3990540-a9c3143999d6817d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"></p>
+<h3 id="3、出现Simulink-Library-Browser-如果没有出现TruckSim-S-Funciton也没有出现提醒信息“Fix”；则右键任意条目点击Refresh刷新或者F5；出现提醒信息“Fix”则直接点击Fix"><a href="#3、出现Simulink-Library-Browser-如果没有出现TruckSim-S-Funciton也没有出现提醒信息“Fix”；则右键任意条目点击Refresh刷新或者F5；出现提醒信息“Fix”则直接点击Fix" class="headerlink" title="3、出现Simulink Library Browser  如果没有出现TruckSim S-Funciton也没有出现提醒信息“Fix”；则右键任意条目点击Refresh刷新或者F5；出现提醒信息“Fix”则直接点击Fix"></a>3、出现Simulink Library Browser  如果没有出现TruckSim S-Funciton也没有出现提醒信息“Fix”；则右键任意条目点击Refresh刷新或者F5；出现提醒信息“Fix”则直接点击Fix</h3><p><img src="https://upload-images.jianshu.io/upload_images/3990540-c653fb739862ecbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3990540-869ca2e7688e69bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.png"></p>
+<h3 id="4、最终出现了TruckSim-S-Function。（掌声）"><a href="#4、最终出现了TruckSim-S-Function。（掌声）" class="headerlink" title="4、最终出现了TruckSim S-Function。（掌声）"></a>4、最终出现了TruckSim S-Function。（掌声）</h3><p><img src="https://upload-images.jianshu.io/upload_images/3990540-8285687c61ce175d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.png"></p>
 
     </div>
 
@@ -197,6 +214,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TruckSim-MATLAB/" rel="tag"># TruckSim, MATLAB</a>
+          </div>
 
         
 
@@ -266,6 +286,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#划重点：F5-或者-刷新Simulink-Library-Browser"><span class="nav-number">1.</span> <span class="nav-text">划重点：F5 或者 刷新Simulink Library Browser</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、在TruckSim中点击Send-to-Simulink"><span class="nav-number">1.1.</span> <span class="nav-text">1、在TruckSim中点击Send to Simulink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、待Simulink打开之后，点击Simulink-Library-Browser"><span class="nav-number">1.2.</span> <span class="nav-text">2、待Simulink打开之后，点击Simulink Library Browser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、出现Simulink-Library-Browser-如果没有出现TruckSim-S-Funciton也没有出现提醒信息“Fix”；则右键任意条目点击Refresh刷新或者F5；出现提醒信息“Fix”则直接点击Fix"><span class="nav-number">1.3.</span> <span class="nav-text">3、出现Simulink Library Browser  如果没有出现TruckSim S-Funciton也没有出现提醒信息“Fix”；则右键任意条目点击Refresh刷新或者F5；出现提醒信息“Fix”则直接点击Fix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、最终出现了TruckSim-S-Function。（掌声）"><span class="nav-number">1.4.</span> <span class="nav-text">4、最终出现了TruckSim S-Function。（掌声）</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -282,6 +303,10 @@
           <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
