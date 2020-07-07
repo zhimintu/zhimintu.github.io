@@ -145,6 +145,151 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/07/lagrange-interpolation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZHIMIN TU">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhimin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/07/lagrange-interpolation/" class="post-title-link" itemprop="url">拉格朗日插值法-Python</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-07 22:11:40 / Modified: 23:14:38" itemprop="dateCreated datePublished" datetime="2020-07-07T22:11:40+08:00">2020-07-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="数据预处理——缺失值处理"><a href="#数据预处理——缺失值处理" class="headerlink" title="数据预处理——缺失值处理"></a>数据预处理——缺失值处理</h2><p>案例来源：<strong>《Python数据分析与挖掘实战》第6章 电力窃漏电用户自动识别</strong></p>
+<p>这里介绍一种缺失值处理手段：插补法，具体是<strong>拉格朗日插值法</strong></p>
+<p>拉格朗日插值法补值的具体方法如下：</p>
+<p>首先从原始数据集中确定因变量和自变量，取出缺失值前后5个数据（前后数据中遇到数据不存在或者为空的，直接将数据舍去，将仅有的数据组成一组）,根据取出来的10个数据组成一组。然后采用拉格朗日多项式插值公式</p>
+<p><img src="https://i.loli.net/2020/07/07/ZqiVEzFQOemxh32.png" alt="image-20200707222902831"></p>
+<p><img src="https://i.loli.net/2020/07/07/wLF8MasC9O3JrpZ.png" alt="image-20200707222936410"></p>
+<p>其中，x为缺失值对应的下标序号，Ln(x)为缺失值的插值结果，xi为非缺失值yi的下标序号。对全部缺失数据依次进行插补，直到不存在缺失值为止。数据插补代码如代码文件6-1_Lagrange_interpolation.py所示。</p>
+<p>配套教材原始代码6-1_Lagrange_interpolation.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding: utf-8 -*-</span><br><span class="line">#拉格朗日插值代码</span><br><span class="line">import pandas as pd #导入数据分析库Pandas</span><br><span class="line">from scipy.interpolate import lagrange #导入拉格朗日插值函数</span><br><span class="line"></span><br><span class="line">inputfile &#x3D; &#39;..&#x2F;data&#x2F;missing_data.xls&#39; #输入数据路径,需要使用Excel格式；</span><br><span class="line">outputfile &#x3D; &#39;..&#x2F;tmp&#x2F;missing_data_processed.xls&#39; #输出数据路径,需要使用Excel格式</span><br><span class="line"></span><br><span class="line">data &#x3D; pd.read_excel(inputfile, header&#x3D;None) #读入数据</span><br><span class="line"></span><br><span class="line">#自定义列向量插值函数</span><br><span class="line">#s为列向量，n为被插值的位置，k为取前后的数据个数，默认为5</span><br><span class="line">def ployinterp_column(s, n, k&#x3D;5):</span><br><span class="line">  y &#x3D; s[list(range(n-k, n)) + list(range(n+1, n+1+k))] #取数</span><br><span class="line">  y &#x3D; y[y.notnull()] #剔除空值</span><br><span class="line">  return lagrange(y.index, list(y))(n) #插值并返回插值结果</span><br><span class="line"></span><br><span class="line">#逐个元素判断是否需要插值</span><br><span class="line">for i in data.columns:</span><br><span class="line">  for j in range(len(data)):</span><br><span class="line">    if (data[i].isnull())[j]: #如果为空即插值。</span><br><span class="line">      data[i][j] &#x3D; ployinterp_column(data[i], j)</span><br><span class="line"></span><br><span class="line">data.to_excel(outputfile, header&#x3D;None, index&#x3D;False) #输出结果</span><br></pre></td></tr></table></figure>
+
+<p>运行之后出现</p>
+<img src="https://i.loli.net/2020/07/07/6RpJEyAUbrwtv3n.png" alt="image-20200707224536149" style="zoom: 67%;" />
+
+<p><img src="https://i.loli.net/2020/07/07/PtWmGLjDQe2EH5X.png" alt="image-20200707224457575"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KeyError: &#39;Passing list-likes to .loc or [] with any missing labels is no longer supported, see https:&#x2F;&#x2F;pandas.pydata.org&#x2F;pandas-docs&#x2F;stable&#x2F;user_guide&#x2F;indexing.html#deprecate-loc-reindex-listlike&#39;</span><br></pre></td></tr></table></figure>
+
+<p>我的解决过程：</p>
+<ol>
+<li><p>将上面出错内容进行搜索，找到以下有用的内容</p>
+<p><a href="https://stackoverflow.com/questions/61291741/passing-list-likes-to-loc-or-with-any-missing-labels-is-no-longer-supported" target="_blank" rel="noopener">尝试reindex</a></p>
+</li>
+<li><p>改写代码</p>
+<p>将</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y &#x3D; s[list(range(n-k, n)) + list(range(n+1, n+1+k))]</span><br></pre></td></tr></table></figure>
+
+<p>改写成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y &#x3D; s.reindex(list(range(n - k, n)) + list(range(n + 1, n + 1 + k)))</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/07/Useridentification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZHIMIN TU">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhimin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/07/Useridentification/" class="post-title-link" itemprop="url">Useridentification</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-07 10:27:33 / Modified: 15:40:45" itemprop="dateCreated datePublished" datetime="2020-07-07T10:27:33+08:00">2020-07-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="电力窃漏电用户自动识别"><a href="#电力窃漏电用户自动识别" class="headerlink" title="电力窃漏电用户自动识别"></a>电力窃漏电用户自动识别</h1><p><img src="https://i.loli.net/2020/07/07/wEd6oM982vczO3Y.png" alt="image-20200707110145129"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/07/git-map/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -619,12 +764,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
